@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Puntos de interés – Vinebre</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<script type="text/javascript" src="https://me.kes.v2.scr.kaspersky-labs.com/7EA5E9BB-55E1-4C31-9C21-4943DDFED2E4/main.js?attr=GoWhZuq40Uumq9MWC2f60gLi3qOgUatKkZUBqr_LUwQjTitqzw5zJ4UsWBDaJUFkGhhcFr0K3YYEaTUbnPJ_cv7eHVc4Gj2owMVJED7idPy33xOJFCXqm8JzmcYplzVw0U8jHcfl9LNaXTJmmkw_yimyaST3UUQChbKg5p4COnJ4-HJSvo82053JlzuSw8Pa1h3kpqibZP8dOZxnkgHRHdch-7VIMr-SqDaEJIoblmWAtu-fax0ctoGM8ncXj3hhBW2-Ua-Qbx2F-LDqkpKGVpD9G3VsmKkx-v_htKVsyR35zlCV3_dSmiUsDY43GdXZ-PC9o_giiKxKDAz371TXkQ" charset="UTF-8"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+  :root { --terra:#8B4513; --ocre:#C8873A; --crema:#F5EDD8; --oscuro:#1A1008; --medio:#5C3A1E; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--crema); color:var(--oscuro); font-family:'Lato',sans-serif; }
+  .hero { background:var(--oscuro); padding:44px 24px 36px; text-align:center; position:relative; overflow:hidden; }
+  .hero::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 30% 50%,rgba(200,135,58,.2) 0%,transparent 60%),radial-gradient(ellipse at 70% 50%,rgba(139,69,19,.15) 0%,transparent 60%); }
+  .hero-eyebrow { font-size:11px; letter-spacing:.35em; color:var(--ocre); text-transform:uppercase; margin-bottom:12px; position:relative; }
+  .hero h1 { font-family:'Playfair Display',serif; font-size:clamp(2rem,6vw,3rem); color:var(--crema); position:relative; margin-bottom:8px; line-height:1.2; }
+  .hero h1 em { color:var(--ocre); font-style:italic; }
+  .hero-sub { font-size:13px; color:rgba(245,237,216,.5); letter-spacing:.15em; text-transform:uppercase; position:relative; }
+  #map { width:100%; height:340px; }
+  .section-title { font-family:'Playfair Display',serif; font-size:1.4rem; color:var(--terra); padding:28px 20px 16px; border-bottom:1px solid rgba(139,69,19,.15); margin:0 0 4px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1px; background:rgba(139,69,19,.1); }
+  .card { background:var(--crema); padding:20px; transition:background .15s; }
+  .card:hover { background:#fffaf0; }
+  .card-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+  .card-num { font-size:11px; font-weight:700; letter-spacing:.2em; color:white; background:var(--terra); padding:3px 9px; border-radius:20px; }
+  .card-tipo { font-size:11px; color:var(--ocre); font-weight:700; letter-spacing:.05em; text-align:right; }
+  .card h3 { font-family:'Playfair Display',serif; font-size:1.05rem; color:var(--oscuro); margin-bottom:4px; line-height:1.3; }
+  .card-addr { font-size:12px; color:var(--medio); margin-bottom:8px; font-style:italic; }
+  .card p { font-size:13px; line-height:1.65; color:#4a3018; margin-bottom:12px; }
+  .map-link { display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:700; color:var(--terra); text-decoration:none; letter-spacing:.05em; text-transform:uppercase; }
+  .map-link:hover { color:var(--ocre); }
+  .map-link svg { width:14px; height:14px; }
+  footer { text-align:center; padding:28px 20px; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:rgba(92,58,30,.4); border-top:1px solid rgba(139,69,19,.1); margin-top:4px; }
+  .custom-marker { background:#8B4513; color:white; border-radius:50%; width:28px; height:28px; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; border:2px solid #C8873A; font-family:'Lato',sans-serif; box-shadow:0 1px 4px rgba(0,0,0,.4); }
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="hero-eyebrow">Ribera d'Ebre · Tarragona</div>
+  <h1>Puntos de interés<br><em>Vinebre</em></h1>
+  <div class="hero-sub">21 lugares del pueblo</div>
+</div>
+<div id="map"></div>
+<div class="section-title">Todos los puntos</div>
+<div class="grid">
+
+    <div class="card" id="punto1">
+      <div class="card-header">
+        <span class="card-num">Punto 1</span>
+        <span class="card-tipo">Administración</span>
+      </div>
+      <div class="card-body">
+        <h3>Ajuntament de Vinebre</h3>
+        <p class="card-addr">Carrer de la Torre, 22</p>
+        <p>Sede del Ayuntamiento de Vinebre, el centro administrativo del municipio. Ubicado en la calle principal del casco antiguo.</p>
+        <a class="map-link" href="https://maps.google.com/?q=41.1842446,0.5906716" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Ver en Google Maps
+        </a>
+      </div>
+    </div>
+    <div class="card" id="punto2">
+      <div class="card-header">
+        <span class="card-num">Punto 2</span>
+        <span class="card-tipo">Instalación deportiva</span>
+      </div>
+      <div class="card-body">
+        <h3>Piscina Pública Municipal</h3>
+        <p class="card-addr">Piscina Pública Municipal de Vinebre</p>
+        <p>Piscina municipal con dos vasos, zona de césped, hamacas y bar. Punto de encuentro de vecinos y visitantes durante el verano.</p>
+        <a class="map-link" href="https://maps.google.com/?q=41.1853256,0.5909888" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Ver en Google Maps
+        </a>
+      </div>
+    </div>
+    <div class="card" id="punto3">
+      <div class="card-header">
+        <span class="card-num">Punto 3</span>
+        <span class="card-tipo">Palacio renacentista</span>
+      </div>
+      <div class="card-body">
+        <h3>Ca Don Joan</h3>
+        <p class="card-addr">Plaça de l'1 d'octubre, 1</p>
+        <p>Palacio renacentista del siglo XVI con fachada barroca y patio porticado. Monumento más emblemático de Vinebre y sede de la oficina de turismo.</p>
+        <a class="map-link" href="https://maps.google.com/?q=41.1838293,0.5887454" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Ver en Google Maps
+        </a>
+      </div>
+    </div>
+    <div class="card" id="punto4">
+      <div class="card-header">
+        <span class="card-num">Punto 4</span>
+        <span class="card-tipo">Educación</span>
+      </div>
+      <div class="card-body">
+        <h3>Col·legi Teresià</h3>
+        <p class="card-addr">Avinguda d'Enric d'Ossó, 5</p>
+        <p>Colegio de las Teresianas, obra del arquitecto modernista Bernat Martorell (discípulo de Gaudí) construida en 1904. Edificio de gran valor patrimonial.</p>
+        <a class="map-link" href="https://maps.google.com/?q=41.1844126,0.5877214" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Ver en Google Maps
+        </a>
+      </div>
+    </div>
+    <div class="card" id="punto5">
+      <div class="card-header">
+        <span class="card-num">Punto 5</span>
+        <span class="card-tipo">Establecimiento local</span>
+      </div>
+      <div class="card-body">
+        <h3>Cal Felico</h3>
+        <p class="card-addr">Carrer del Forn, 8</p>
+        <p>Local emblemático del pueblo situado en el Carrer del Forn, en pleno casco antiguo de Vinebre.</p>
+        <a class="map-link" href="https://maps.google.com/?q=41.1837018,0.5881888" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Ver en Google Maps
+        </a>
+      </div>
+    </div>
+    <div class="card" id="punto6">
+      <div class="card-header">
+        <span class="card-num">Punto 6</span>
+        <span class="card-tipo">Farmacia</span>
+      </div>
+      <div class="card-body">
+        <h3>Farmacia de Vinebre</h3>
+        <p class="card-addr">Avinguda Francesc Macià, 7</p>
+        <p>Farmacia del municipio que presta servicio farmacéutico a los vecinos de Vinebre.</p>
+        <a class="map-link" href="https://maps.google.com/?q=41.1834089,0.5879858" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Ver en Google Maps
+        </a>
+      </div>
+    </div>
+    <div class="card" id="punto7">
+      <div class="card-header">
+        <span class="card-num">Punto 7</span>
+        <span class="card-tipo">Plaza e iglesia</span>
+      </div>
+      <div class="card-body">
+        <h3>Plaça del Rei – Església</h3>
+        <p class="card-addr">Plaça del Rei</p>
+        <p>Plaza central de Vinebre con la iglesia parroquial, cuya piedra clave data de 1691, año en que el municipio se independizó de Ascó. Corazón histórico del pueblo.</p>
+        <a class="map-link" href="https://maps.google.com/?q=41.18343345814533,0.5885349408682506" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Ver en Google Maps
+        </a>
+      </div>
+    </div>
+    <div class="card" id="punto8">
+      <div class="card-header">
+        <span class="card-num">Punto 8</span>
+        <span class="card-tipo">Taller</span>
+      </div>
+      <div class="card-body">
+        <h3>Taller Rubén</h3>
+        <p class="card-addr">Avinguda Francesc Macià, 43</p>
+        <p>Taller mecánico situado en la avenida principal de Vinebre, en la zona sur del municipio.</p>
+        <a class="map-link" href="https://maps.google.com/?q=41.1827213,0.5902158" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Ver en Google Maps
+        </a>
+      </div>
+    </div>
+    <div class="card" id="punto9">
+      <div class="card-header">
+        <span class="card-num">Punto 9</span>
+        <span class="card-tipo">Restaurante</span>
+      </div>
+      <div class="card-body">
+        <h3>Bar Restaurant Sant Miquel</h3>
+        <p class="card-addr">Carrer de Sant Miquel, 36</p>
+        <p>Bar y restaurante del pueblo, situado en la calle dedicada al patrón del municipio, el arcángel Sant Miquel.</p>
+        <a class="map-link" href="https://maps.google.com/?q=41.182453,0.5911527" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Ver en Google Maps
+        </a>
+      </div>
+    </div>
+    <div class="card" id="punto10">
+      <div class="card-header">
+        <span class="card-num">Punto 10</span>
+        <span class="card-tipo">Sanidad</span>
+      </div>
+      <div class="card-body">
+        <h3>Consultorio Local de Vinebre</h3>
+        <p class="card-addr">Avinguda de les Quatre Barres Catalanes, 2</p>
+        <p>Centro de atención primaria del municipio, que presta servicios sanitarios básicos a los vecinos de Vinebre y alrededores.</p>
+        <a class="map-link" href="https://maps.google.com/?q=41.1828887,0.5917316" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Ver en Google Maps
+        </a>
+      </div>
+    </div>
+    <div class="card" id="punto11">
+      <div class="card-header">
+        <span class="card-num">Punto 11</span>
+        <span class="card-tipo">Taller</span>
+      </div>
+      <div class="card-body">
+        <h3>Taller Ernest</h3>
+        <p class="card-addr">Carrer del Sindicat, 21</p>
+        <p>Taller local situado en la calle del Sindicato, que recuerda la histórica Cooperativa Agrícola de Vinebre.</p>
+        <a class="map-link" href="https://maps.google.com/?q=41.1839811,0.591726" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Ver en Google Maps
+        </a>
+      </div>
+    </div>
+    <div class="card" id="punto12">
+      <div class="card-header">
+        <span class="card-num">Punto 12</span>
+        <span class="card-tipo">Centro social</span>
+      </div>
+      <div class="card-body">
+        <h3>Casino de Vinebre</h3>
+        <p class="card-addr">Carrer Gaudí, 19</p>
+        <p>El Casino es el centro social y cultural del pueblo, un punto de encuentro tradicional para los vecinos de Vinebre.</p>
+        <a class="map-link" href="https://maps.google.com/?q=41.1841459,0.590666" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Ver en Google Maps
+        </a>
+      </div>
+    </div>
+    <div class="card" id="punto13">
+      <div class="card-header">
+        <span class="card-num">Punto 13</span>
+        <span class="card-tipo">Instalación deportiva</span>
+      </div>
+      <div class="card-body">
+        <h3>Pista Polideportiva Municipal</h3>
+        <p class="card-addr">Carrer Gaudí, 12</p>
+        <p>Pista polideportiva municipal de Vinebre, espacio de práctica deportiva y ocio para los vecinos del municipio.</p>
+        <a class="map-link" href="https://maps.google.com/?q=41.1839237,0.5906375" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Ver en Google Maps
+        </a>
+      </div>
+    </div>
+    <div class="card" id="punto14">
+      <div class="card-header">
+        <span class="card-num">Punto 14</span>
+        <span class="card-tipo">Comercio</span>
+      </div>
+      <div class="card-body">
+        <h3>Estanc Tabacs</h3>
+        <p class="card-addr">Carrer de la Torre, 10</p>
+        <p>Estanco situado en la calle de la Torre, una de las calles comerciales más antiguas del casco histórico de Vinebre.</p>
+        <a class="map-link" href="https://maps.google.com/?q=41.1840776,0.5898761" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Ver en Google Maps
+        </a>
+      </div>
+    </div>
+    <div class="card" id="punto15">
+      <div class="card-header">
+        <span class="card-num">Punto 15</span>
+        <span class="card-tipo">Cervecería artesanal</span>
+      </div>
+      <div class="card-body">
+        <h3>L'Anjub Cervesa Artesana</h3>
+        <p class="card-addr">Carrer de la Carrerada, s/n</p>
+        <p>Cervecería artesanal de Vinebre, productora de cervezas locales. Un ejemplo del emprendimiento agroalimentario del municipio.</p>
+        <a class="map-link" href="https://maps.google.com/?q=41.184898,0.589952" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Ver en Google Maps
+        </a>
+      </div>
+    </div>
+    <div class="card" id="punto16">
+      <div class="card-header">
+        <span class="card-num">Punto 16</span>
+        <span class="card-tipo">Parque infantil</span>
+      </div>
+      <div class="card-body">
+        <h3>Parc Infantil de Vinebre</h3>
+        <p class="card-addr">Carrer Nou, 5</p>
+        <p>Parque infantil municipal de Vinebre, espacio de juego y ocio para los más pequeños del pueblo.</p>
+        <a class="map-link" href="https://maps.google.com/?q=41.185198,0.589867" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Ver en Google Maps
+        </a>
+      </div>
+    </div>
+    <div class="card" id="punto17">
+      <div class="card-header">
+        <span class="card-num">Punto 17</span>
+        <span class="card-tipo">Educación</span>
+      </div>
+      <div class="card-body">
+        <h3>Escola Pública Les Eres</h3>
+        <p class="card-addr">Carrer de la Torre, POL 17, 43792 Vinebre, Tarragona</p>
+        <p>Escuela pública Les Eres, perteneciente a la ZER Ribera d'Ebre Nord. Centro educativo de referencia para los niños de Vinebre y municipios cercanos.</p>
+        <a class="map-link" href="https://maps.google.com/?q=41.185033,0.590903" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Ver en Google Maps
+        </a>
+      </div>
+    </div>
+    <div class="card" id="punto18">
+      <div class="card-header">
+        <span class="card-num">Punto 18</span>
+        <span class="card-tipo">Bodega</span>
+      </div>
+      <div class="card-body">
+        <h3>Molí de Rué</h3>
+        <p class="card-addr">Carrer dels Portellets, s/n</p>
+        <p>Bodega Molí de Rué, uno de los cellers vinebrans productores de vinos con denominación de origen Tarragona.</p>
+        <a class="map-link" href="https://maps.google.com/?q=41.185178977506325,0.5872492436030469" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Ver en Google Maps
+        </a>
+      </div>
+    </div>
+    <div class="card" id="punto19">
+      <div class="card-header">
+        <span class="card-num">Punto 19</span>
+        <span class="card-tipo">Aparcamiento</span>
+      </div>
+      <div class="card-body">
+        <h3>Pàrquing Camp de Futbol i Autocaravanes</h3>
+        <p class="card-addr">Avinguda de les Quatre Barres Catalanes, 18</p>
+        <p>Zona de aparcamiento junto al campo de fútbol, habilitada también para autocaravanas. Acceso cómodo al municipio para visitantes.</p>
+        <a class="map-link" href="https://maps.google.com/?q=41.184828,0.593571" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Ver en Google Maps
+        </a>
+      </div>
+    </div>
+    <div class="card" id="punto20">
+      <div class="card-header">
+        <span class="card-num">Punto 20</span>
+        <span class="card-tipo">Empresa local</span>
+      </div>
+      <div class="card-body">
+        <h3>Pescaporta Distribuciones SL</h3>
+        <p class="card-addr">Carrer de la Torre, s/n</p>
+        <p>Empresa de distribución local de Vinebre, situada en la zona del Carrer de la Torre.</p>
+        <a class="map-link" href="https://maps.google.com/?q=41.185806, 0.59475" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Ver en Google Maps
+        </a>
+      </div>
+    </div>
+    <div class="card" id="punto21">
+      <div class="card-header">
+        <span class="card-num">Punto 21</span>
+        <span class="card-tipo">Servicio municipal</span>
+      </div>
+      <div class="card-body">
+        <h3>Cementiri Municipal de Vinebre</h3>
+        <p class="card-addr">Carrer del Castell</p>
+        <p>Cementerio municipal de Vinebre, situado junto al Carrer del Castell, cerca del emplazamiento de la antigua fortaleza medieval del pueblo.</p>
+        <a class="map-link" href="https://maps.google.com/?q=41.188509,0.589106" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          Ver en Google Maps
+        </a>
+      </div>
+    </div>
+    <div class="card" id="punto22">
+  <div class="card-header">
+    <span class="card-num">Punto 22</span>
+    <span class="card-tipo">Exportació de pedra natural</span>
+  </div>
+  <div class="card-body">
+    <h3>Embarcador de Vinebre</h3>
+    <p class="card-addr">Embarcadero, 43792 Vinebre, Tarragona</p>
+    <p>Antiguo embarcador vinculado al transporte y exportación de piedra natural a través del río Ebro.</p>
+    <a class="map-link" href="https://maps.google.com/?q=41.17448715760803,0.6011658322599918" target="_blank">
+      Ver en Google Maps
+    </a>
+  </div>
+ </div>
+  <div class="card" id="punto23">
+  <div class="card-header">
+    <span class="card-num">Punto 23</span>
+    <span class="card-tipo">Lugar de culto</span>
+  </div>
+  <div class="card-body">
+    <h3>Ermita de Sant Miquel</h3>
+    <p class="card-addr">43792 Vinebre, Tarragona</p>
+    <p>Ermita dedicada a Sant Miquel, patrón de Vinebre.</p>
+    <a class="map-link" href="https://maps.google.com/?q=41.17581216718394,0.608430698500863" target="_blank">
+      Ver en Google Maps
+    </a>
+  </div>
+</div>
+  <div class="card" id="punto24">
+  <div class="card-header">
+    <span class="card-num">Punto 24</span>
+    <span class="card-tipo">Gasolinera</span>
+  </div>
+  <div class="card-body">
+    <h3>Estación de Servicio Petronor - Repsol</h3>
+    <p class="card-addr">C-12, Km. 77,8 DE, 43792 Vinebre, Tarragona</p>
+    <p>Estación de servicio situada en la carretera C-12, que ofrece suministro de combustible y servicios para conductores y viajeros.</p>
+    <a class="map-link" href="https://maps.google.com/?q=41.180863892403686,0.5935886918803127" target="_blank">
+      Ver en Google Maps
+    </a>
+  </div>
+</div>
+  <div class="card" id="punto25">
+  <div class="card-header">
+    <span class="card-num">Punto 25</span>
+    <span class="card-tipo">Botiga</span>
+  </div>
+  <div class="card-body">
+    <h3>SPAR</h3>
+    <p class="card-addr">Carrer de la Torre, 21, 43792 Vinebre, Tarragona</p>
+    <p>Supermercado de proximidad donde los vecinos pueden adquirir productos de alimentación, bebidas y artículos de uso diario.</p>
+    <a class="map-link" href="https://maps.google.com/?q=41.18428138479079,0.5903597974946413" target="_blank">
+      Ver en Google Maps
+    </a>
+  </div>
+</div>
+<footer>Vinebre · Ribera d'Ebre · Tarragona · 43792</footer>
+<script>
+var map = L.map('map').setView([41.1840, 0.5900], 15);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution:'© OpenStreetMap'}).addTo(map);
+function addMarker(lat, lon, num, name, tipo) {
+  var icon = L.divIcon({className:'',html:'<div class="custom-marker">'+num+'</div>',iconSize:[28,28],iconAnchor:[14,14],popupAnchor:[0,-14]});
+  L.marker([lat,lon],{icon:icon}).addTo(map).bindPopup('<strong>'+name+'</strong><br><small>'+tipo+'</small>');
+}
+  addMarker(41.1842446, 0.5906716, 1, 'Ajuntament de Vinebre', 'Administración');
+  addMarker(41.1853256, 0.5909888, 2, 'Piscina Pública Municipal', 'Instalación deportiva');
+  addMarker(41.1838293, 0.5887454, 3, 'Ca Don Joan', 'Palacio renacentista');
+  addMarker(41.1844126, 0.5877214, 4, 'Col·legi Teresià', 'Educación');
+  addMarker(41.1837018, 0.5881888, 5, 'Cal Felico', 'Establecimiento local');
+  addMarker(41.1834089, 0.5879858, 6, 'Farmacia de Vinebre', 'Farmacia');
+  addMarker(41.1834641, 0.5884965, 7, 'Plaça del Rei – Església', 'Plaza e iglesia');
+  addMarker(41.1827213, 0.5902158, 8, 'Taller Rubén', 'Taller');
+  addMarker(41.182453, 0.5911527, 9, 'Bar Restaurant Sant Miquel', 'Restaurante');
+  addMarker(41.1828887, 0.5917316, 10, 'Consultorio Local de Vinebre', 'Sanidad');
+  addMarker(41.1839811, 0.591726, 11, 'Taller Ernest', 'Taller');
+  addMarker(41.1841459, 0.590666, 12, 'Casino de Vinebre', 'Centro social');
+  addMarker(41.1839237, 0.5906375, 13, 'Pista Polideportiva Municipal', 'Instalación deportiva');
+  addMarker(41.1840776, 0.5898761, 14, 'Estanc Tabacs', 'Comercio');
+  addMarker(41.184898, 0.589952, 15, 'L\'Anjub Cervesa Artesana', 'Cervecería artesanal');
+  addMarker(41.185198, 0.589867, 16, 'Parc Infantil de Vinebre', 'Parque infantil');
+  addMarker(41.185033, 0.590903, 17, 'Escola Pública Les Eres', 'Educación');
+  addMarker(41.185251, 0.587185, 18, 'Molí de Rué', 'Bodega');
+  addMarker(41.184828, 0.593571, 19, 'Pàrquing Camp de Futbol i Autocaravanes', 'Aparcamiento');
+  addMarker(41.185832, 0.594389, 20, 'Pescaporta Distribuciones SL', 'Empresa local');
+  addMarker(41.188509, 0.589106, 21, 'Cementiri Municipal de Vinebre', 'Servicio municipal');
+  addMarker(41.17448715760803, 0.6011658322599918, 22, 'Embarcador de Vinebre', 'Exportació de pedra natural');
+  addMarker(41.17581216718394, 0.608430698500863, 23, 'Ermita de Sant Miquel', 'Lugar de culto');
+  addMarker(41.180863892403686, 0.5935886918803127, 24, 'Estación de Servicio Petronor - Repsol', 'Gasolinera');
+  addMarker(41.18428138479079, 0.5903597974946413, 25, 'SPAR', 'Botiga');
+</script>
+</body>
+</html>
