@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Festes de Vinebre</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#faf7f2;color:#2b2318;font-size:14px;line-height:1.65}
+header{background:#f0e9d8;color:#2b1a0a;text-align:center;padding:2.5rem 1rem 2rem}
+header h1{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,4vw,2.4rem);font-weight:600;letter-spacing:.03em;margin-bottom:.25rem}
+header .sub{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;opacity:.55}
+.stripe{height:4px;background:linear-gradient(90deg,#8b1a1a,#c8960c,#8b1a1a,#c8960c)}
+main{max-width:760px;margin:0 auto;padding:2rem 1rem 3rem;display:grid;gap:1rem}
+.card{display:grid;grid-template-columns:80px 1fr;background:#fff;border:1px solid #e2d9c8;border-radius:6px;overflow:hidden}
+.card-aside{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;padding:.75rem .5rem;text-align:center}
+.card-aside .ico{font-size:1.5rem;line-height:1}
+.card-aside .mes{font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;opacity:.8;font-weight:500}
+.card-aside .data{font-family:'Playfair Display',serif;font-size:.78rem;font-style:italic;line-height:1.3}
+.col-blau  {background:#1a3560;color:#dce8f7}
+.col-vermell{background:#6b1a1a;color:#f7e0e0}
+.col-or    {background:#6a4a08;color:#fdefc8}
+.col-verd  {background:#1e3f1a;color:#d8edcf}
+.col-lila  {background:#3a1a5c;color:#e8d8f7}
+.card-body{padding:.9rem 1rem;border-left:1px solid #e2d9c8}
+.card-body h2{font-family:'Playfair Display',serif;font-size:1rem;font-weight:600;margin-bottom:.15rem;color:#2b1a0a}
+.card-body .dedicat{font-size:.65rem;text-transform:uppercase;letter-spacing:.12em;color:#8a6628;font-weight:500;margin-bottom:.55rem}
+.card-body p{color:#3d2f1a;font-size:.82rem;line-height:1.65}
+.card-body p+p{margin-top:.4rem}
+.tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:.65rem}
+.tag{font-size:.6rem;padding:2px 8px;border-radius:20px;border:1px solid;letter-spacing:.05em;font-weight:500}
+.t-blau  {border-color:#1a3560;color:#1a3560}
+.t-vermell{border-color:#6b1a1a;color:#6b1a1a}
+.t-or    {border-color:#6a4a08;color:#6a4a08}
+.t-verd  {border-color:#1e3f1a;color:#1e3f1a}
+.t-lila  {border-color:#3a1a5c;color:#3a1a5c}
+footer{text-align:center;padding:1.25rem;font-size:.7rem;color:#9a8a6a;border-top:1px solid #e2d9c8;background:#f0ead8;letter-spacing:.05em}
+@media(max-width:480px){.card{grid-template-columns:70px 1fr}}
+</style>
+</head>
+<body>
+
+<header>
+  <div style="margin-bottom:.75rem"><img src="https://vinebre.loading.net/wp-content/uploads/2016/06/LogoVinebre.png" alt="Ajuntament de Vinebre" style="height:70px"></div>
+  <h1>Festes de Vinebre</h1>
+  <p class="sub">Ribera d'Ebre · Terres de l'Ebre</p>
+</header>
+<div class="stripe"></div>
+
+<main>
+
+  <!-- GENER: Sant Enric -->
+  <article class="card">
+    <div class="card-aside col-blau">
+      <span class="ico">✝️</span>
+      <span class="mes">Gener</span>
+      <span class="data">27 de gener</span>
+    </div>
+    <div class="card-body">
+      <h2>Festa de Sant Enric d'Ossó</h2>
+      <p class="dedicat">Fill il·lustre de Vinebre</p>
+      <p>El cap de setmana més proper al 27 de gener, Vinebre honora el sant nascut al poble amb oficis religiosos, benedicció d'animals, àpats populars i música.</p>
+      <div class="tags">
+        <span class="tag t-blau">Religiós</span>
+        <span class="tag t-blau">Cultural</span>
+        <span class="tag t-blau">Benedicció d'animals</span>
+      </div>
+    </div>
+  </article>
+
+  <!-- MAIG: Sant Miquel -->
+  <article class="card">
+    <div class="card-aside col-vermell">
+      <span class="ico">⛪</span>
+      <span class="mes">Maig</span>
+      <span class="data">2n dissabte de maig</span>
+    </div>
+    <div class="card-body">
+      <h2>Ermita de Sant Miquel</h2>
+      <p class="dedicat">Origen templari · L'Arcàngel</p>
+      <p>Processó de l'arcàngel sota una pluja de pètals i paperets de colors, seguida de romiatge fins a l'ermita amb missa i l'<em>auferta</em>. Esmorzar de conill rostit, jotes, sardanes i jocs populars. El diumenge, paella gegant per a tot el poble.</p>
+      <div class="tags">
+        <span class="tag t-vermell">Processó</span>
+        <span class="tag t-vermell">Sardanes</span>
+        <span class="tag t-vermell">Paella gegant</span>
+      </div>
+    </div>
+  </article>
+
+  <!-- MAIG: Plantada del Maig -->
+  <article class="card">
+    <div class="card-aside col-verd">
+      <span class="ico">🌲</span>
+      <span class="mes">Maig</span>
+      <span class="data">Plantada del Maig</span>
+    </div>
+    <div class="card-body">
+      <h2>Plantada del Maig</h2>
+      <p class="dedicat">Tradició medieval · L'arbre de la primavera</p>
+      <p>Els veïns talen un pi al bosc, el transporten fins a la plaça. L'arbre, símbol de renovació i prosperitat, presideix la plaça durant dies. Una tradició medieval compartida amb una trentena de pobles catalans.</p>
+      <div class="tags">
+        <span class="tag t-verd">Tradició medieval</span>
+        <span class="tag t-verd">Participació popular</span>
+        <span class="tag t-verd">Primavera</span>
+      </div>
+    </div>
+  </article>
+
+  <!-- JUNY: Revetlla Sant Joan -->
+  <article class="card">
+    <div class="card-aside col-or">
+      <span class="ico">🔥</span>
+      <span class="mes">Juny</span>
+      <span class="data">Nit del 23 al 24</span>
+    </div>
+    <div class="card-body">
+      <h2>Revetlla de Sant Joan</h2>
+      <p class="dedicat">La nit del foc · Inici de l'estiu</p>
+      <p>La nit del 23 de juny, foguera, coca de Sant Joan, cava i música al carrer per celebrar la nit més curta de l'any i donar la benvinguda a l'estiu.</p>
+      <div class="tags">
+        <span class="tag t-or">Foguera</span>
+        <span class="tag t-or">Coca de Sant Joan</span>
+        <span class="tag t-or">Música</span>
+        <span class="tag t-or">Festa al carrer</span>
+      </div>
+    </div>
+  </article>
+
+  <!-- AGOST: Festa Major -->
+  <article class="card">
+    <div class="card-aside col-or">
+      <span class="ico">🎉</span>
+      <span class="mes">Agost</span>
+      <span class="data">Darrera setmana</span>
+    </div>
+    <div class="card-body">
+      <h2>Festa Major</h2>
+      <p class="dedicat">Sant Joan Baptista · Santa Rosa · Sant Roc</p>
+      <p>La darrera setmana d'agost: curses, ball de plaça, cucanyes i cercavila pels carrers engalanats. Durant la setmana es lliura el <em>Premi de Narrativa Ribera d'Ebre</em>, el certamen literari en català més antic de les Terres de l'Ebre.</p>
+      <div class="tags">
+        <span class="tag t-or">Ball de plaça</span>
+        <span class="tag t-or">Curses</span>
+        <span class="tag t-or">Premi Narrativa</span>
+      </div>
+    </div>
+  </article>
+
+  <!-- OCTUBRE: Cap de Setmana Ibèric -->
+  <article class="card">
+    <div class="card-aside col-blau">
+      <span class="ico">⚱️</span>
+      <span class="mes">Octubre</span>
+      <span class="data">Principis d'octubre</span>
+    </div>
+    <div class="card-body">
+      <h2>Cap de Setmana Ibèric</h2>
+      <p class="dedicat">Jaciment de Sant Miquel · Ruta dels Ibers</p>
+      <p>El jaciment iberoromà de Sant Miquel acull visites guiades i teatralitzades, tallers familiars i activitats per descobrir la civilització dels ilercavons, el poble iber de l'Ebre.</p>
+      <div class="tags">
+        <span class="tag t-blau">Arqueologia</span>
+        <span class="tag t-blau">Visites guiades</span>
+        <span class="tag t-blau">Tallers familiars</span>
+      </div>
+    </div>
+  </article>
+
+  <!-- OCTUBRE: Fira del Vimblanc -->
+  <article class="card">
+    <div class="card-aside col-verd">
+      <span class="ico">🍷</span>
+      <span class="mes">Octubre</span>
+      <span class="data">Fira del Vimblanc</span>
+    </div>
+    <div class="card-body">
+      <h2>Fira del Vimblanc</h2>
+      <p class="dedicat">Vi dolç tradicional de Vinebre</p>
+      <p>Festa al voltant del vi dolç típic de Vinebre. Els tres cellers del poble — Vins Desantesos, Molí de Ruè i Unió Fruits — ofereixen tasts guiats, artesania i productes locals. Els alumnes de l'Escola Les Eres elaboren el seu propi Vimblanc i escullen l'etiqueta de l'any.</p>
+      <div class="tags">
+        <span class="tag t-verd">Vi dolç</span>
+        <span class="tag t-verd">Tast guiat</span>
+        <span class="tag t-verd">Artesania</span>
+        <span class="tag t-verd">Activitats infantils</span>
+      </div>
+    </div>
+  </article>
+
+  <!-- OCTUBRE/NOVEMBRE: Castanyada -->
+  <article class="card">
+    <div class="card-aside col-lila">
+      <span class="ico">🌰</span>
+      <span class="mes">Octubre</span>
+      <span class="data">31 d'octubre — 1 de novembre</span>
+    </div>
+    <div class="card-body">
+      <h2>La Castanyada i Tots Sants</h2>
+      <p class="dedicat">Tardor · Tradició catalana</p>
+      <p>Castanyes torrades, moniatos i panellets per celebrar la tardor i el dia de Tots Sants. La festa es viu al carrer i en família, sovint combinada amb activitats de Halloween per als més petits.</p>
+      <div class="tags">
+        <span class="tag t-lila">Castanyes</span>
+        <span class="tag t-lila">Panellets</span>
+        <span class="tag t-lila">Tots Sants</span>
+        <span class="tag t-lila">Activitats infantils</span>
+      </div>
+    </div>
+  </article>
+
+  <!-- DESEMBRE/GENER: Nadal i Reis -->
+  <article class="card">
+    <div class="card-aside col-vermell">
+      <span class="ico">⭐</span>
+      <span class="mes">Des. — Gen.</span>
+      <span class="data">Nadal i Reis Mags</span>
+    </div>
+    <div class="card-body">
+      <h2>Nadal i Cavalcada de Reis</h2>
+      <p class="dedicat">Festes de Nadal · 5 de gener</p>
+      <p>Fira de Nadal amb artesania i La Marató de TV3, pessebre i Cap d'Any, fins a la Cavalcada de Reis el 5 de gener, quan els Reis d'Orient arriben al poble per als infants.</p>
+      <div class="tags">
+        <span class="tag t-vermell">Fira de Nadal</span>
+        <span class="tag t-vermell">La Marató TV3</span>
+        <span class="tag t-vermell">Pessebre</span>
+        <span class="tag t-vermell">Cavalcada de Reis</span>
+      </div>
+    </div>
+  </article>
+
+</main>
+
+<footer>Ajuntament de Vinebre · Ribera d'Ebre · Terres de l'Ebre</footer>
+
+</body>
+</html>

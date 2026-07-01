@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vinebre – Patrimoni</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');
+
+  :root {
+    --argila: #C07A4F;
+    --nit:    #1A2B2F;
+    --blanc:  #FAFAF7;
+    --muted:  #666;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--blanc);
+    color: var(--nit);
+    font-weight: 300;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    height: 100svh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem 1.5rem;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://www.turismeriberaebre.org/assets//2013/06/IMG_5904-e1370340989788.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+      rgba(26,43,47,0.4) 0%,
+      rgba(26,43,47,0.75) 70%,
+      rgba(26,43,47,0.92) 100%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--argila);
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 10vw, 5.5rem);
+    line-height: 1.0;
+    font-weight: 400;
+    color: white;
+    margin-bottom: 1.2rem;
+  }
+  .hero h1 em { font-style: italic; color: var(--argila); }
+
+  .hero-sub {
+    color: rgba(255,255,255,0.7);
+    font-size: clamp(0.9rem, 3vw, 1.05rem);
+    max-width: 420px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.6;
+  }
+
+  .hero-arrow {
+    position: relative;
+    z-index: 1;
+    margin-top: auto;
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    color: rgba(255,255,255,0.45);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+  .hero-arrow svg { width: 20px; opacity: 0.5; }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(6px); }
+  }
+
+  /* ── LLOC ── */
+  .lloc {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #e0d8ce;
+  }
+  .lloc:last-of-type { border-bottom: 1px solid #e0d8ce; }
+
+  .lloc-img {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--nit);
+    flex-shrink: 0;
+  }
+
+  .lloc-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.8s ease;
+  }
+  .lloc:hover .lloc-img img { transform: scale(1.04); }
+
+  .lloc-img-bar {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 40%;
+    background: linear-gradient(to top, rgba(26,43,47,0.6), transparent);
+    pointer-events: none;
+  }
+
+  .lloc-num-overlay {
+    position: absolute;
+    bottom: 1rem;
+    left: 1.25rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+    font-weight: 600;
+  }
+
+  .lloc-body {
+    padding: 1.75rem 1.5rem 2rem;
+    background: var(--blanc);
+  }
+
+  .lloc-cat {
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--argila);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .lloc h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 6vw, 2.2rem);
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--nit);
+    margin-bottom: 1rem;
+  }
+
+  .lloc p {
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.75;
+    margin-bottom: 0.7rem;
+  }
+
+  .lloc-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 1rem;
+  }
+
+  .tag {
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.28rem 0.75rem;
+    border: 1px solid #ccc;
+    color: var(--muted);
+    border-radius: 2px;
+  }
+  .tag.a {
+    border-color: var(--argila);
+    color: var(--argila);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #EAE4D8;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    border-top: 1px solid #d8d0c4;
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--nit);
+    margin-bottom: 0.3rem;
+  }
+
+  footer p { font-size: 0.8rem; color: #999; }
+
+  .footer-links {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .footer-links a {
+    font-size: 0.75rem;
+    color: #2C5F6E;
+    text-decoration: none;
+  }
+  .footer-links a:hover { text-decoration: underline; }
+
+  /* ── DESKTOP (>= 768px): imatge i text costat a costat ── */
+  @media (min-width: 768px) {
+    .lloc {
+      flex-direction: row;
+      min-height: 480px;
+    }
+    .lloc.reverse { flex-direction: row-reverse; }
+
+    .lloc-img {
+      width: 50%;
+      aspect-ratio: unset;
+      flex-shrink: 0;
+    }
+
+    .lloc-body {
+      width: 50%;
+      padding: 3rem 3.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .lloc h2 { font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Ribera d'Ebre · Catalunya</p>
+    <h1>Vinebre,<br><em>sirgant<br>per la història</em></h1>
+    <p class="hero-sub">Un poble a la riba esquerra de l'Ebre on natura, arqueologia i fe s'entrellacen des de fa mil·lennis.</p>
+  </div>
+  <div class="hero-arrow">
+    Descobreix
+    <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+      <path d="M12 5v14M5 12l7 7 7-7"/>
+    </svg>
+  </div>
+</section>
+
+<!-- 1 · Embarcador -->
+<article class="lloc">
+  <div class="lloc-img">
+    <img
+      src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhSSMjVyqa29AE5MktlvX0d9XIyVfZWBPTEr5aEseO-t08Kp14H16wW6AbDCJcGqTU1ZMIBzNtByJaGNhEJDOnf7ZmsGhBdYTX54y42aGqim9lQbJYBHPrgcJTTHM1tpJ0kKVTGen8O_oA/s1600/P1018792.JPG"
+      alt="L'Embarcador de Vinebre amb l'Ebre al fons"
+      onerror="this.parentElement.style.background='#2C5F6E'">
+    <div class="lloc-img-bar"></div>
+    <span class="lloc-num-overlay">01 / 04</span>
+  </div>
+  <div class="lloc-body">
+    <p class="lloc-cat">Espai Natural</p>
+    <h2>L'Embarcador</h2>
+    <p>Espai natural privilegiat a la riba de l'Ebre, molt proper a l'embarcador fenici del s. VII aC i al jaciment iberoromà de Sant Miquel. El bosc de ribera acull una gran varietat d'espècies vegetals i aus.</p>
+    <p>Disposa de rampa per a embarcacions i és punt de sortida de rutes a peu, en BTT i excursions en caiac. Zona de pícnic amb barbacoes i parc infantil, oberta a tothom.</p>
+    <div class="lloc-tags">
+      <span class="tag a">Natura</span>
+      <span class="tag">Caiac</span>
+      <span class="tag">BTT</span>
+      <span class="tag">Pícnic</span>
+      <span class="tag">Senderisme</span>
+    </div>
+  </div>
+</article>
+
+<!-- 2 · Ermita Sant Miquel -->
+<article class="lloc reverse">
+  <div class="lloc-img">
+    <img
+      src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjGVgHJCt4675xOS4543guuh3gmrgAy2fmI3DHVXV4YUB-cUc8fpG7gCssLYiHmAIuHzqRkzYbCoU2zEI46b9Q9ItMYms-NWDHcrdjvq2USUDl3ZL3f7WsrEKZvx2g5B_aVrX2vF4Z758g/s1600/_DSC0254+Sant+Miquel.jpg"
+      alt="Ermita de Sant Miquel de Vinebre"
+      onerror="this.parentElement.style.background='#3D5A44'">
+    <div class="lloc-img-bar"></div>
+    <span class="lloc-num-overlay">02 / 04</span>
+  </div>
+  <div class="lloc-body">
+    <p class="lloc-cat">Patrimoni Religiós</p>
+    <h2>Ermita de Sant Miquel</h2>
+    <p>Situada a la serra del Tormo, a l'entrada del Pas de l'Ase, la capella va ser reconstruïda pels cartoixans d'Escaladei l'any 1680 sobre ruïnes templeres del s. XII. Protegida com a bé cultural d'interès local.</p>
+    <p>Al seu costat s'alça el poblat ibèric homònim, que testimonia l'habitació de l'indret des de temps molt antics. Des de la capella s'obtenen vistes espectaculars del riu i la comarca.</p>
+    <div class="lloc-tags">
+      <span class="tag a">Patrimoni</span>
+      <span class="tag">S. XII · Templera</span>
+      <span class="tag">Vistes panoràmiques</span>
+    </div>
+  </div>
+</article>
+
+<!-- 3 · Ca Don Joan -->
+<article class="lloc">
+  <div class="lloc-img">
+    <img
+      src="https://www.turismeriberaebre.org/assets//2017/01/ca-don-joan.jpg"
+      alt="Ca Don Joan, palau renaixentista de Vinebre"
+      onerror="this.parentElement.style.background='#1A2B2F'">
+    <div class="lloc-img-bar"></div>
+    <span class="lloc-num-overlay">03 / 04</span>
+  </div>
+  <div class="lloc-body">
+    <p class="lloc-cat">Arquitectura</p>
+    <h2>Ca Don Joan</h2>
+    <p>Palau renaixentista del s. XVI amb façana barroca i pati interior porxat. Organitzat al voltant d'un pati central amb reixes de ferro forjat i medallons de bust, referència als <em>tondos</em> renaixentistes italians.</p>
+    <p>Avui acull l'Oficina de Turisme Municipal, exposicions temporals, concerts i una sala audiovisual dedicada al jaciment iberoromà de Sant Miquel.</p>
+    <div class="lloc-tags">
+      <span class="tag a">Arquitectura</span>
+      <span class="tag">S. XVI</span>
+      <span class="tag">Oficina Turisme</span>
+      <span class="tag">Exposicions</span>
+    </div>
+  </div>
+</article>
+
+<!-- 4 · Casa Museu Enric d'Ossó -->
+<article class="lloc reverse">
+  <div class="lloc-img">
+    <img
+      src="https://rutaosso.org/wp-content/uploads/2021/07/vinebre_06-scaled.jpg"
+      alt="Casa Museu Enric d'Ossó a Vinebre"
+      onerror="this.parentElement.style.background='#C07A4F'">
+    <div class="lloc-img-bar"></div>
+    <span class="lloc-num-overlay">04 / 04</span>
+  </div>
+  <div class="lloc-body">
+    <p class="lloc-cat">Museu · Fe</p>
+    <h2>Casa Museu<br>Enric d'Ossó</h2>
+    <p>Casa natal de sant Enric d'Ossó i Cervelló, nascut a Vinebre el 1840. El 1876 va fundar la Companyia de Santa Teresa de Jesús i el 1993 va ser santificat, convertint-se en el primer sant de la Ribera d'Ebre.</p>
+    <p>Les monges teresianes han transformat l'edifici en una casa-museu on es conserven el llit natal, mobles d'època, el seu despatx personal i l'habitació natal convertida en oratori. Visites guiades concertades.</p>
+    <div class="lloc-tags">
+      <span class="tag a">Museu</span>
+      <span class="tag">Visita guiada</span>
+      <span class="tag">Primer Sant Ribera d'Ebre</span>
+    </div>
+  </div>
+</article>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Vinebre</div>
+  <p>Ribera d'Ebre · Catalunya</p>
+  <div class="footer-links">
+    <a href="https://www.turismevinebre.cat" target="_blank">turismevinebre.cat</a>
+    <a href="https://www.turismeriberaebre.org" target="_blank">turismeriberaebre.org</a>
+  </div>
+</footer>
+
+</body>
+</html>
